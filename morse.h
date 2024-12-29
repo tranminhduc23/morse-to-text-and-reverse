@@ -29,11 +29,13 @@ int isValidMorseFile(char *filename) {
     }
 
     char ch;
-    int position = 0;
+    int line = 1;
     while ((ch = fgetc(inputFile)) != EOF) {
-        position++;
+        if (ch == '\n') {
+            line++;
+        }
         if (!isValidMorseCharacter(ch)) {
-            printf("Error: Invalid character '%c' at position %d.\n", ch, position);
+            printf("Error: Unrecognised character '%c' at line %d.\n", ch, line);
             fclose(inputFile);
             return 0; // Chứa ký tự không hợp lệ
         }
